@@ -2,8 +2,6 @@
   :description "Addon for dropwizard to log using the logback-logstash-encoder (see https://github.com/logstash/logstash-logback-encoder)"
   :url "https://github.com/Wikia/dropwizard-logback-logsash-encoder"
   :scm {:url "git@github.com:Wikia/dropwizard-logback-logstash-encoder.git"}
-  :source-paths ["src/main/clojure"]
-  :java-source-paths ["src/main/java"]
   :pom-addition [:developers [:developer
                               [:name "Nelson Monterroso"]
                               [:url "http://github.com/nmonterroso"]
