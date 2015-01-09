@@ -1,6 +1,5 @@
 package com.wikia.dropwizard.logstash.appender;
 
-import ch.qos.logback.core.net.SyslogConstants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.logging.AbstractAppenderFactory;
 
@@ -15,7 +14,7 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
 
 	@Min(1)
 	@Max(65535)
-	protected int port = SyslogConstants.SYSLOG_PORT;
+	protected int port;
 
 	protected boolean includeCallerInfo = false;
 

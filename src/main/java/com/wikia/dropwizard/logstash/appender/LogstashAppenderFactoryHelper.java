@@ -31,8 +31,7 @@ public class LogstashAppenderFactoryHelper {
 		return fieldNames;
 	}
 
-	public static String getCustomFieldsFromHashMap(HashMap<String, String> map)
-		throws IOException {
+	public static String getCustomFieldsFromHashMap(HashMap<String, String> map) throws IOException {
 		StringWriter writer = new StringWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(writer, map);
