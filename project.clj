@@ -8,7 +8,15 @@
                               [:name "Nelson Monterroso"]
                               [:url "http://github.com/nmonterroso"]
                               [:email "nelson@wikia-inc.com"]]]
-  :deploy-repositories {"releases" {:url "https://oss.sonatype.org/service/local/staging/deploy/maven2/" :creds :gpg}
-                        "snapshots" {:url "https://oss.sonatype.org/content/repositories/snapshots/" :creds :gpg}}
+  :pom-plugins [[org.apache.maven.plugins/maven-source-plugin "2.2.1"
+                 {:executions [:execution
+                               [:id "attach-sources"]
+                               [:goals ([:goal "jar-no-fork"])]]}]
+                [org.apache.maven.plugins/maven-javadoc-plugin "2.9.1"
+                 {:executions [:execution
+                               [:id "attach-javadocs"]
+                               [:goals ([:goal "jar"])]]}]]
+  :deploy-repositories {"releases" {:url "https://oss.sonatype.org/service/local/staging/deploy/maven2" :creds :gpg}
+                        "snapshots" {:url "https://oss.sonatype.org/content/repositories/snapshots" :creds :gpg}}
   :dependencies [[io.dropwizard/dropwizard-logging "0.7.0"]
                  [net.logstash.logback/logstash-logback-encoder "3.5"]])
