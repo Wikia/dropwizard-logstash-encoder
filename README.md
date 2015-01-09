@@ -1,6 +1,6 @@
 # dropwizard-logback-logstash-encoder
 
-(Dropwizard)[http://dropwizard.io/] logging addon for sending logs using the (logstash-logback-encoder)[https://github.com/logstash/logstash-logback-encoder]. This is needed because Dropwizard overwrites the default mechanism for loading logback configuration (logback.xml) in favor of its application.yml files. Both 
+[Dropwizard](http://dropwizard.io/) logging addon for sending logs using the [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder). This is needed because Dropwizard overwrites the default mechanism for loading logback configuration (logback.xml) in favor of its application.yml files. Both 
 
 ## Installation
 Leiningen:
@@ -25,7 +25,7 @@ logging:
       ...
 ```
 
-Additional configuration keys for the appender, see (logstash-logback-encoder#usage)[https://github.com/logstash/logstash-logback-encoder/blob/master/README.md#usage] for info. All configs apply to both `logstash-socket` and `logstash-tcp`, unless otherwise noted:
+Additional configuration keys for the appender, see [logstash-logback-encoder#usage](https://github.com/logstash/logstash-logback-encoder/blob/master/README.md#usage) for info. All configs apply to both `logstash-socket` and `logstash-tcp`, unless otherwise noted:
 * `host` - string - maps to `syslogHost` when using `logstash-socket`, and `remoteHost` when using `logstash-tcp`
 * `port` - int
 * `includeCallerInfo` - boolean
