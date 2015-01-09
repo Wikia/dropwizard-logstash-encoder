@@ -3,9 +3,10 @@
 [Dropwizard](http://dropwizard.io/) logging addon for sending logs using the [logstash-logback-encoder](https://github.com/logstash/logstash-logback-encoder). This is needed because Dropwizard overwrites the default mechanism for loading logback configuration (logback.xml) in favor of its application.yml files. Both 
 
 ## Installation
+TODO: these aren't published to maven central yet. Remove this line when they are.
 Leiningen:
 ```clojure
-:dependencies [[com.wikia/dropwizard-logstash-encoder "0.1.0-SNAPSHOT"]]
+:dependencies [[com.wikia/dropwizard-logstash-encoder "1.0.0"]]
 ```
 Maven:
 ```xml
