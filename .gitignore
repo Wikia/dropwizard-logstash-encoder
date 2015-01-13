@@ -6,4 +6,5 @@ pom.xml.asc
 *.class
 **.iml
 **.ipr
+**.iws
 .idea/
