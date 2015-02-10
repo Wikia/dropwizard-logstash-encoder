@@ -12,39 +12,39 @@ import java.io.IOException;
 
 @JsonTypeName("logstash-socket")
 public class LogstashSocketAppenderFactory extends AbstractLogstashAppenderFactory {
-	public LogstashSocketAppenderFactory() {
-		port = SyslogConstants.SYSLOG_PORT;
-	}
+  public LogstashSocketAppenderFactory() {
+    port = SyslogConstants.SYSLOG_PORT;
+  }
 
-	@Override
-	public Appender<ILoggingEvent> build(LoggerContext context, String applicationName, Layout<ILoggingEvent> layout) {
-		final LogstashSocketAppender appender = new LogstashSocketAppender();
+  @Override
+  public Appender<ILoggingEvent> build(LoggerContext context, String applicationName, Layout<ILoggingEvent> layout) {
+    final LogstashSocketAppender appender = new LogstashSocketAppender();
 
-		appender.setName("logstash-socket-appender");
-		appender.setContext(context);
-		appender.setHost(host);
-		appender.setPort(port);
+    appender.setName("logstash-socket-appender");
+    appender.setContext(context);
+    appender.setHost(host);
+    appender.setPort(port);
 
-		appender.setIncludeCallerInfo(includeCallerInfo);
-		appender.setIncludeMdc(includeMdc);
-		appender.setIncludeContext(includeContext);
+    appender.setIncludeCallerInfo(includeCallerInfo);
+    appender.setIncludeMdc(includeMdc);
+    appender.setIncludeContext(includeContext);
 
-		if (customFields != null) {
-			try {
-				String custom = LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);
-				appender.setCustomFields(custom);
-			} catch (IOException e) {
-				System.out.println("unable to parse customFields: "+e.getMessage());
-			}
-		}
+    if (customFields != null) {
+      try {
+        String custom = LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);
+        appender.setCustomFields(custom);
+      } catch (IOException e) {
+        System.out.println("unable to parse customFields: "+e.getMessage());
+      }
+    }
 
-		if (fieldNames != null) {
-			appender.setFieldNames(LogstashAppenderFactoryHelper.getFieldNamesFromHashMap(fieldNames));
-		}
+    if (fieldNames != null) {
+      appender.setFieldNames(LogstashAppenderFactoryHelper.getFieldNamesFromHashMap(fieldNames));
+    }
 
-		addThresholdFilter(appender, threshold);
-		appender.start();
+    addThresholdFilter(appender, threshold);
+    appender.start();
 
-		return wrapAsync(appender);
-	}
+    return wrapAsync(appender);
+  }
 }
