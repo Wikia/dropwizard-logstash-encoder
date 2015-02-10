@@ -5,7 +5,7 @@
 
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>dropwizard-logstash-encoder</name>
   <description>
     Addon for dropwizard to log using the logback-logstash-encoder (see https://github.com/logstash/logstash-logback-encoder)
