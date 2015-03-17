@@ -1,11 +1,13 @@
 package com.wikia.dropwizard.logstash.appender;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Maps;
 import io.dropwizard.logging.AbstractAppenderFactory;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.util.HashMap;
 
 abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
@@ -22,7 +24,7 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
 
   protected boolean includeMdc = true;
 
-  protected HashMap<String, String> customFields;
+  protected HashMap<String, String> customFields = Maps.newHashMap();
 
   protected HashMap<String, String> fieldNames;
 
@@ -95,4 +97,16 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   public void setFieldNames(HashMap<String, String> fieldNames) {
     this.fieldNames = fieldNames;
   }
+
+  protected String renderCustomFields(String applicationName) {
+      // always set the application name except when overridden
+      customFields.putIfAbsent("applicationName", applicationName);
+
+      try {
+          return LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);
+      } catch (IOException e) {
+          System.out.println("unable to parse customFields: " + e.getMessage());
+          return "{}";
+      }
+    }
 }

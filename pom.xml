@@ -5,12 +5,12 @@
 
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <name>dropwizard-logstash-encoder</name>
   <description>
     Addon for dropwizard to log using the logback-logstash-encoder (see https://github.com/logstash/logstash-logback-encoder)
   </description>
-  <url>https://github.com/Wikia/dropwizard-logback-logsash-encoder</url>
+  <url>https://github.com/Wikia/dropwizard-logback-logstash-encoder</url>
 
   <licenses>
     <license>
@@ -128,12 +128,12 @@
     <dependency>
       <groupId>io.dropwizard</groupId>
       <artifactId>dropwizard-logging</artifactId>
-      <version>0.7.0</version>
+      <version>0.7.1</version>
     </dependency>
     <dependency>
       <groupId>net.logstash.logback</groupId>
       <artifactId>logstash-logback-encoder</artifactId>
-      <version>3.5</version>
+      <version>4.2</version>
     </dependency>
   </dependencies>
 </project>

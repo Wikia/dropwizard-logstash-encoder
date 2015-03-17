@@ -11,7 +11,6 @@ import net.logstash.logback.encoder.LogstashEncoder;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.io.IOException;
 
 @JsonTypeName("logstash-tcp")
 public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory {
@@ -59,14 +58,8 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     encoder.setIncludeContext(includeContext);
     encoder.setIncludeMdc(includeMdc);
     encoder.setIncludeCallerInfo(includeCallerInfo);
-    if (customFields != null) {
-      try {
-        String custom = LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);
-        encoder.setCustomFields(custom);
-      } catch (IOException e) {
-        System.out.println("unable to parse customFields: "+e.getMessage());
-      }
-    }
+
+    encoder.setCustomFields(renderCustomFields(applicationName));
 
     if (fieldNames != null) {
       encoder.setFieldNames(LogstashAppenderFactoryHelper.getFieldNamesFromHashMap(fieldNames));
@@ -79,4 +72,5 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
 
     return wrapAsync(appender);
   }
+
 }
