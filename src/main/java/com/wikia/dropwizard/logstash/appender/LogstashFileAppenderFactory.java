@@ -144,7 +144,7 @@ public class LogstashFileAppenderFactory extends AbstractLogstashAppenderFactory
 
 
     protected FileAppender<ILoggingEvent> buildAppender(LoggerContext context) {
-        if (archive) {
+        if (isArchive()) {
             final RollingFileAppender<ILoggingEvent> appender = new RollingFileAppender<>();
 
             final DefaultTimeBasedFileNamingAndTriggeringPolicy<ILoggingEvent> triggeringPolicy =
