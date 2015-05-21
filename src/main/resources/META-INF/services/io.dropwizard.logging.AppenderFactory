@@ -1,2 +1,3 @@
 com.wikia.dropwizard.logstash.appender.LogstashSocketAppenderFactory
 com.wikia.dropwizard.logstash.appender.LogstashTcpAppenderFactory
+com.wikia.dropwizard.logstash.appender.LogstashFileAppenderFactory
