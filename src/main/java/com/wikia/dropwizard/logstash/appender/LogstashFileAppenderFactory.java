@@ -71,24 +71,11 @@ public class LogstashFileAppenderFactory extends AbstractLogstashAppenderFactory
         this.archivedFileCount = archivedFileCount;
     }
 
-    @JsonProperty
-    public TimeZone getTimeZone() {
-        return timeZone;
-    }
-
-    @JsonProperty
-    public void setTimeZone(TimeZone timeZone) {
-        this.timeZone = timeZone;
-    }
-
     @JsonIgnore
     @ValidationMethod(message = "must have archivedLogFilenamePattern if archive is true")
     public boolean isValidArchiveConfiguration() {
         return !archive || (archivedLogFilenamePattern != null);
     }
-
-    @NotNull
-    private TimeZone timeZone = TimeZone.getTimeZone("UTC");
 
     @Override public Appender<ILoggingEvent> build(final LoggerContext context, final String applicationName, final Layout<ILoggingEvent> layout) {
         final FileAppender<ILoggingEvent> appender = buildAppender(context);

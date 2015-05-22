@@ -14,7 +14,7 @@ import javax.validation.constraints.Min;
 import java.io.IOException;
 
 @JsonTypeName("logstash-tcp")
-public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory {
+public class LogstashTcpAppenderFactory extends AbstractLogstashRemoteAppenderFactory {
   private boolean includeCallerData = false;
 
   @Min(1)

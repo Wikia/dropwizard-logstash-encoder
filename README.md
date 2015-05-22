@@ -65,7 +65,6 @@ without the log pattern. Defaults in parenthesis.
 * `archive`	- (true) Whether or not to archive old events in separate files.
 * `archivedLogFilenamePattern` - (none)	Required if archive is true. The filename pattern for archived files. %d is replaced with the date in yyyy-MM-dd form, and the fact that it ends with .gz indicates the file will be gzipped as it’s archived. Likewise, filename patterns which end in .zip will be filled as they are archived.
 * `archivedFileCount` -	(5) The number of archived files to keep. Must be between 1 and 50.
-* `timeZone` -	(UTC) The time zone to which event timestamps will be converted.
 
 # Examples
 
