@@ -11,7 +11,7 @@ import net.logstash.logback.appender.LogstashSocketAppender;
 import java.io.IOException;
 
 @JsonTypeName("logstash-socket")
-public class LogstashSocketAppenderFactory extends AbstractLogstashAppenderFactory {
+public class LogstashSocketAppenderFactory extends AbstractLogstashRemoteAppenderFactory {
   public LogstashSocketAppenderFactory() {
     port = SyslogConstants.SYSLOG_PORT;
   }
