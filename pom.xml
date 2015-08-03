@@ -5,7 +5,7 @@
 
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <name>dropwizard-logstash-encoder</name>
   <description>
     Addon for dropwizard to log using the logback-logstash-encoder (see https://github.com/logstash/logstash-logback-encoder)
@@ -51,8 +51,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.2</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
       <plugin>
