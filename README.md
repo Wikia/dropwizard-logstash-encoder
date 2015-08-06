@@ -8,7 +8,7 @@ Maven:
 <dependency>
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
 </dependency>
 ```
 
