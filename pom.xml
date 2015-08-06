@@ -23,17 +23,15 @@
     </license>
   </licenses>
 
-<distributionManagement>
+  <distributionManagement>
     <repository>
-        <id>internal.repo</id>
-        <name>Temporary Staging Repository</name>
-        <url>file://${project.build.directory}/mvn-repo</url>
+      <id>internal.repo</id>
+      <name>Temporary Staging Repository</name>
+      <url>file://${project.build.directory}/mvn-repo</url>
     </repository>
-</distributionManagement>
+  </distributionManagement>
  
-<build>
-  <pluginManagement>
-
+  <build>
     <plugins>
       <plugin>
         <artifactId>maven-deploy-plugin</artifactId>
@@ -42,10 +40,6 @@
           <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
         </configuration>
       </plugin>
-    </plugins>
-  </pluginManagement>
-  
-    <plugins>
       <plugin>
         <groupId>com.github.github</groupId>
         <artifactId>site-maven-plugin</artifactId>
