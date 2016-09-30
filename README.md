@@ -8,9 +8,15 @@ Maven:
 <dependency>
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>2.0.0</version>
 </dependency>
 ```
+
+Use version:
+
+`1.0.2` for Dropwizard `<1.0`
+
+`2.0.0` for Dropwizard `1.0`
 
 ## Usage
 You must configure dropwizard to use these appenders in your application.yml file:
