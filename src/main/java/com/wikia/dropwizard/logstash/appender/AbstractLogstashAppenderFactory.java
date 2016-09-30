@@ -3,10 +3,11 @@ package com.wikia.dropwizard.logstash.appender;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.logging.AbstractAppenderFactory;
 
+import java.util.HashMap;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.HashMap;
 
 abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   @NotNull
@@ -16,7 +17,7 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   @Max(65535)
   protected int port;
 
-  protected boolean includeCallerInfo = false;
+  protected boolean includeCallerData = false;
 
   protected boolean includeContext = true;
 
@@ -47,13 +48,13 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   }
 
   @JsonProperty
-  public boolean getIncludeCallerInfo() {
-    return includeCallerInfo;
+  public boolean getIncludeCallerData() {
+    return includeCallerData;
   }
 
   @JsonProperty
-  public void setIncludeCallerInfo(boolean includeCallerInfo) {
-    this.includeCallerInfo = includeCallerInfo;
+  public void setIncludeCallerData(boolean includeCallerData) {
+    this.includeCallerData = includeCallerData;
   }
 
   @JsonProperty

@@ -1,21 +1,22 @@
 package com.wikia.dropwizard.logstash.appender;
 
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
-import ch.qos.logback.core.Layout;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import io.dropwizard.logging.async.AsyncAppenderFactory;
+import io.dropwizard.logging.filter.LevelFilterFactory;
+import io.dropwizard.logging.layout.LayoutFactory;
 import net.logstash.logback.appender.LogstashTcpSocketAppender;
 import net.logstash.logback.encoder.LogstashEncoder;
 
+import java.net.InetSocketAddress;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.io.IOException;
 
 @JsonTypeName("logstash-tcp")
 public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory {
-  private boolean includeCallerData = false;
 
   @Min(1)
   @Max(65535)
@@ -23,16 +24,6 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
 
   public LogstashTcpAppenderFactory() {
     this.port = LogstashTcpSocketAppender.DEFAULT_PORT;
-  }
-
-  @JsonProperty
-  public void setIncludeCallerData(boolean includeCallerData) {
-    this.includeCallerData = includeCallerData;
-  }
-
-  @JsonProperty
-  public boolean getIncludeCallerData() {
-    return includeCallerData;
   }
 
   @JsonProperty
@@ -45,27 +36,27 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     this.queueSize = queueSize;
   }
 
-  public Appender<ILoggingEvent> build(LoggerContext context, String applicationName, Layout<ILoggingEvent> layout) {
+  @Override
+  public Appender build(LoggerContext context, String s, LayoutFactory layoutFactory,
+                        LevelFilterFactory levelFilterFactory,
+                        AsyncAppenderFactory asyncAppenderFactory) {
     final LogstashTcpSocketAppender appender = new LogstashTcpSocketAppender();
     final LogstashEncoder encoder = new LogstashEncoder();
 
     appender.setName("logstash-tcp-appender");
     appender.setContext(context);
-    appender.setRemoteHost(host);
-    appender.setPort(port);
+    appender.addDestinations(new InetSocketAddress(host, port));
     appender.setIncludeCallerData(includeCallerData);
     appender.setQueueSize(queueSize);
 
     encoder.setIncludeContext(includeContext);
     encoder.setIncludeMdc(includeMdc);
-    encoder.setIncludeCallerInfo(includeCallerInfo);
+    encoder.setIncludeCallerData(includeCallerData);
+
     if (customFields != null) {
-      try {
-        String custom = LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);
-        encoder.setCustomFields(custom);
-      } catch (IOException e) {
-        System.out.println("unable to parse customFields: "+e.getMessage());
-      }
+      LogstashAppenderFactoryHelper
+          .getCustomFieldsFromHashMap(customFields)
+          .ifPresent(encoder::setCustomFields);
     }
 
     if (fieldNames != null) {
@@ -73,10 +64,10 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     }
 
     appender.setEncoder(encoder);
-    addThresholdFilter(appender, threshold);
+    appender.addFilter(levelFilterFactory.build(threshold));
     encoder.start();
     appender.start();
 
-    return wrapAsync(appender);
+    return wrapAsync(appender, asyncAppenderFactory);
   }
 }

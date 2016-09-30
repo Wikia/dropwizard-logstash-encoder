@@ -6,8 +6,10 @@ import net.logstash.logback.fieldnames.LogstashFieldNames;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.Optional;
 
 public class LogstashAppenderFactoryHelper {
+
   public static LogstashFieldNames getFieldNamesFromHashMap(HashMap<String, String> map) {
     LogstashFieldNames fieldNames = new LogstashFieldNames();
 
@@ -31,10 +33,15 @@ public class LogstashAppenderFactoryHelper {
     return fieldNames;
   }
 
-  public static String getCustomFieldsFromHashMap(HashMap<String, String> map) throws IOException {
+  public static Optional<String> getCustomFieldsFromHashMap(HashMap<String, String> map) {
     StringWriter writer = new StringWriter();
     ObjectMapper mapper = new ObjectMapper();
-    mapper.writeValue(writer, map);
-    return writer.toString();
+    try {
+      mapper.writeValue(writer, map);
+    } catch (IOException e) {
+      System.err.println("unable to parse customFields: " + e.getMessage());
+      return Optional.empty();
+    }
+    return Optional.of(writer.toString());
   }
 }
