@@ -23,11 +23,11 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
 
   protected boolean includeMdc = true;
 
+  protected boolean includeFullStackTrace = true;
+
   protected HashMap<String, String> customFields;
 
   protected HashMap<String, String> fieldNames;
-
-  protected Boolean includeFullStackTrace = true;
 
   @JsonProperty
   public void setHost(String host) {
@@ -80,6 +80,11 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   }
 
   @JsonProperty
+  public void setIncludeFullStackTrace(boolean includeFullStackTrace) {
+    this.includeFullStackTrace = includeFullStackTrace;
+  }
+
+  @JsonProperty
   public HashMap<String, String> getCustomFields() {
     return customFields;
   }
@@ -97,11 +102,6 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   @JsonProperty
   public void setFieldNames(HashMap<String, String> fieldNames) {
     this.fieldNames = fieldNames;
-  }
-
-  @JsonProperty
-  public void setIncludeFullStackTrace(boolean includeFullStackTrace) {
-    this.includeFullStackTrace = includeFullStackTrace;
   }
 
 
