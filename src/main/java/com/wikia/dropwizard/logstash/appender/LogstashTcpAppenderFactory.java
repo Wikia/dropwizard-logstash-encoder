@@ -1,5 +1,7 @@
 package com.wikia.dropwizard.logstash.appender;
 
+import static com.wikia.dropwizard.logstash.appender.LogstashAppenderFactoryHelper.shortStackTraceConverter;
+
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
@@ -59,6 +61,11 @@ public class LogstashTcpAppenderFactory extends AbstractLogstashAppenderFactory 
     encoder.setIncludeContext(includeContext);
     encoder.setIncludeMdc(includeMdc);
     encoder.setIncludeCallerInfo(includeCallerInfo);
+
+    if (!includeFullStackTrace) {
+      encoder.setThrowableConverter(shortStackTraceConverter());
+    }
+
     if (customFields != null) {
       try {
         String custom = LogstashAppenderFactoryHelper.getCustomFieldsFromHashMap(customFields);

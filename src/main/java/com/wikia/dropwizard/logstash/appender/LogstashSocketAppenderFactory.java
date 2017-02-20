@@ -1,5 +1,7 @@
 package com.wikia.dropwizard.logstash.appender;
 
+import static com.wikia.dropwizard.logstash.appender.LogstashAppenderFactoryHelper.shortStackTraceConverter;
+
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
@@ -12,6 +14,7 @@ import java.io.IOException;
 
 @JsonTypeName("logstash-socket")
 public class LogstashSocketAppenderFactory extends AbstractLogstashAppenderFactory {
+
   public LogstashSocketAppenderFactory() {
     port = SyslogConstants.SYSLOG_PORT;
   }
@@ -28,6 +31,10 @@ public class LogstashSocketAppenderFactory extends AbstractLogstashAppenderFacto
     appender.setIncludeCallerInfo(includeCallerInfo);
     appender.setIncludeMdc(includeMdc);
     appender.setIncludeContext(includeContext);
+
+    if (!includeFullStackTrace) {
+      appender.setThrowableConverter(shortStackTraceConverter());
+    }
 
     if (customFields != null) {
       try {
@@ -47,4 +54,5 @@ public class LogstashSocketAppenderFactory extends AbstractLogstashAppenderFacto
 
     return wrapAsync(appender);
   }
+
 }

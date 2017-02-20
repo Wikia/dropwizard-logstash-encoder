@@ -2,6 +2,7 @@ package com.wikia.dropwizard.logstash.appender;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.logging.AbstractAppenderFactory;
+import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -25,6 +26,8 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   protected HashMap<String, String> customFields;
 
   protected HashMap<String, String> fieldNames;
+
+  protected Boolean includeFullStackTrace = true;
 
   @JsonProperty
   public void setHost(String host) {
@@ -95,4 +98,11 @@ abstract class AbstractLogstashAppenderFactory extends AbstractAppenderFactory {
   public void setFieldNames(HashMap<String, String> fieldNames) {
     this.fieldNames = fieldNames;
   }
+
+  @JsonProperty
+  public void setIncludeFullStackTrace(boolean includeFullStackTrace) {
+    this.includeFullStackTrace = includeFullStackTrace;
+  }
+
+
 }
