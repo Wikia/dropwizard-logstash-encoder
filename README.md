@@ -8,7 +8,7 @@ Maven:
 <dependency>
   <groupId>com.wikia</groupId>
   <artifactId>dropwizard-logstash-encoder</artifactId>
-  <version>1.0.2</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -29,6 +29,7 @@ Additional configuration keys for the appender, see [logstash-logback-encoder#us
 * `includeMdc` - boolean
 * `customFields` - hashmap - the configuration differs from the original logstash-logback-encoder config in that this is not a raw json string (see example below)
 * `fieldNames` - hashmap
+* `includeFullStackTrace` - bool - if `false`, stack traces are limited to depth of `1`
 * `queueSize` - int - only valid for `logstash-tcp`
 * `includeCallerData` - bool - only valid for `logstash-tcp`
 

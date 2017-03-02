@@ -2,6 +2,7 @@ package com.wikia.dropwizard.logstash.appender;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.logstash.logback.fieldnames.LogstashFieldNames;
+import net.logstash.logback.stacktrace.ShortenedThrowableConverter;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -36,5 +37,11 @@ public class LogstashAppenderFactoryHelper {
     ObjectMapper mapper = new ObjectMapper();
     mapper.writeValue(writer, map);
     return writer.toString();
+  }
+
+  public static ShortenedThrowableConverter shortStackTraceConverter() {
+    ShortenedThrowableConverter throwableConverter = new ShortenedThrowableConverter();
+    throwableConverter.setMaxDepthPerThrowable(1);
+    return throwableConverter;
   }
 }
