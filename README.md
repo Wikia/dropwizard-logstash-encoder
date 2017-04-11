@@ -14,9 +14,9 @@ Maven:
 
 Use version:
 
-`1.0.2` for Dropwizard `<1.0`
+`1.1.0` for Dropwizard `<1.0`
 
-`2.0.0` for Dropwizard `1.0`
+`2.0.0` for Dropwizard `>=1.0`
 
 ## Usage
 You must configure dropwizard to use these appenders in your application.yml file:
