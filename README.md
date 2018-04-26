@@ -63,6 +63,68 @@ LoggerFactory.getLogger("myTestLogger").warn(
 	),
 	"warning! warning!");
 ```
+
+
+## Development
+
+### Deploying Artifacts
+
+#### On Workstation
+
+To make the artifacts available on you local workstation, in `~/.m2/`, execute:
+
+```bash
+$ mvn install
+```
+
+
+#### Local Artifact Repository
+
+Update your Maven settings (`~/.m2/settings.xml`) so that is contains
+`<servers>` and `<profile>`blocks similar to the following.  Replace
+`[USERNAME]`, `[PASSWORD]` and `[REPO_URL]` with the appropriate values.
+
+```xml
+  <servers>
+    <server>
+      <id>local-repo</id>
+      <username>[USERNAME]</username>
+      <password>[PASSWORD]</password>
+    </server>
+  </servers>
+
+  <profiles>
+    <profile>
+      <id>local-repo</id>
+      <properties>
+        <altDeploymentRepository>local-repo::default::[REPO_URL]</altDeploymentRepository>
+      </properties>
+    </profile>
+  </profiles>
+```
+
+The following command will be able to deploy to your Maven artifacts
+repository.
+
+```bash
+$ mvn3 -P local-repo deploy
+```
+
+The [Apache Maven Deploy
+Plugin](http://maven.apache.org/plugins/maven-deploy-plugin/) documentation
+contains more information configuration.
+
+
+#### Sonatype OSS Nexus Repository
+
+This is intended for the maintainers of this project.  Use the `ossrh-deploy`
+Maven profile to deploy the artifacts to [Sonatype's OSS Nexus
+Repository](https://oss.sonatype.org/).
+
+```bash
+$ mvn -P ossrh-deploy clean deploy
+```
+
 ## License
 
 Distributed under the Eclipse Public License either version 1.0 or (at
